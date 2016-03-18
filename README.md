@@ -33,6 +33,15 @@ $provider = new Stevenmaguire\OAuth2\Client\Provider\Zendesk([
 ```
 For further usage of this package please refer to the [core package documentation on "Authorization Code Grant"](https://github.com/thephpleague/oauth2-client#usage).
 
+### Update and read subdomain after configuration
+
+```php
+$currentSubdomain = $provider->getSubdomain();
+$newSubdomain = $currentSubdomain . '-v2';
+$provider->setSubdomain($newSubdomain);
+```
+The provider will not complete configuration if a subdomain is not provided and updating the subdomain will silently fail if the value provided does not return truthy from `empty()`.
+
 ## Testing
 
 ``` bash
