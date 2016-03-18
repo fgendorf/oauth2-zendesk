@@ -47,6 +47,19 @@ class ZendeskTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function testSetSubdomain()
+    {
+        $matches = [
+            '' => $this->subdomain,
+            'foo' => 'foo'
+        ];
+
+        array_walk($matches, function ($match, $subdomain) {
+            $this->provider->setSubdomain($subdomain);
+            $this->assertEquals($match, $this->provider->getSubdomain());
+        });
+    }
+
     public function testAuthorizationUrl()
     {
         $url = $this->provider->getAuthorizationUrl();
@@ -149,8 +162,9 @@ class ZendeskTest extends \PHPUnit_Framework_TestCase
     public function testExceptionThrownWhenErrorObjectReceived()
     {
         $status = rand(401,599);
+        $error = $this->getJsonFile('error_response.json');
         $postResponse = m::mock('Psr\Http\Message\ResponseInterface');
-        $postResponse->shouldReceive('getBody')->andReturn('[{"errorCode": "INVALID_SESSION_ID","message": "Session expired or invalid"}]');
+        $postResponse->shouldReceive('getBody')->andReturn($error);
         $postResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
         $postResponse->shouldReceive('getStatusCode')->andReturn($status);
         $client = m::mock('GuzzleHttp\ClientInterface');

@@ -108,7 +108,7 @@ class Zendesk extends AbstractProvider
         $statusCode = $response->getStatusCode();
         if ($statusCode >= 400) {
             throw new IdentityProviderException(
-                isset($data[0]['message']) ? $data[0]['message'] : $response->getReasonPhrase(),
+                isset($data['description']) ? $data['description'] : $response->getReasonPhrase(),
                 $statusCode,
                 $response
             );
@@ -125,5 +125,31 @@ class Zendesk extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new ZendeskResourceOwner($response);
+    }
+
+    /**
+     * Retrieves currently configured subdomain.
+     *
+     * @return string
+     */
+    public function getSubdomain()
+    {
+        return $this->subdomain;
+    }
+
+    /**
+     * Updates currently configured subdomain.
+     *
+     * @param string $subdomain
+     *
+     * @return Zendesk
+     */
+    public function setSubdomain($subdomain)
+    {
+        if (!empty($subdomain)) {
+            $this->subdomain = $subdomain;
+        }
+
+        return $this;
     }
 }
