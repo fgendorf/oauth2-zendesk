@@ -151,9 +151,9 @@ class ZendeskTest extends \PHPUnit_Framework_TestCase
         $user = $this->provider->getResourceOwner($token);
 
         $this->assertEquals($userData, $user->toArray());
-        $this->assertEquals($userData['id'], $user->getId());
-        $this->assertEquals($userData['name'], $user->getName());
-        $this->assertEquals($userData['email'], $user->getEmail());
+        $this->assertEquals($userData['user']['id'], $user->getId());
+        $this->assertEquals($userData['user']['name'], $user->getName());
+        $this->assertEquals($userData['user']['email'], $user->getEmail());
     }
 
     /**
