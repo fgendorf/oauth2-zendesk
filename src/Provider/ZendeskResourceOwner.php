@@ -31,7 +31,7 @@ class ZendeskResourceOwner implements ResourceOwnerInterface
      */
     public function getId()
     {
-        return $this->getResponseData('id');
+        return $this->getResponseData('user.id');
     }
 
     /**
@@ -41,7 +41,7 @@ class ZendeskResourceOwner implements ResourceOwnerInterface
      */
     public function getName()
     {
-        return $this->getResponseData('name');
+        return $this->getResponseData('user.name');
     }
 
     /**
@@ -51,7 +51,7 @@ class ZendeskResourceOwner implements ResourceOwnerInterface
      */
     public function getEmail()
     {
-        return $this->getResponseData('email');
+        return $this->getResponseData('user.email');
     }
 
     /**
