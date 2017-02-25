@@ -82,7 +82,8 @@ class ZendeskTest extends \PHPUnit_Framework_TestCase
 
         $url = $this->provider->getAuthorizationUrl($options);
 
-        $this->assertContains(urlencode(implode(' ', $options['scope'])), $url);
+        $encodedScope = http_build_query(['scope' => implode(' ', $options['scope'])], null, '&', \PHP_QUERY_RFC3986);
+        $this->assertContains($encodedScope, $url);
     }
 
     public function testGetAuthorizationUrl()
