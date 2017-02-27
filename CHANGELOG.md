@@ -1,6 +1,23 @@
 # Changelog
 All Notable changes to `oauth2-zendesk` will be documented in this file
 
+## 2.1.0 - 2017-02-27
+
+### Added
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Resource owner data accessor now maps correctly per Zendesk documentation; thanks (@jall)
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 2.0.0 - 2017-01-25
 
 ### Added
