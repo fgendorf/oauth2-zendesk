@@ -12,6 +12,8 @@ class Zendesk extends AbstractProvider
 
     protected $subdomain;
 
+    protected $scopes = [];
+
     /**
      * @var string Key used in a token response to identify the resource owner.
      */
@@ -81,7 +83,24 @@ class Zendesk extends AbstractProvider
      */
     protected function getDefaultScopes()
     {
-        return [];
+        return $this->scopes;
+    }
+
+    /**
+     * Set the default scopes used by this provider.
+     *
+     * This should not be a complete list of all scopes, but the minimum
+     * required for the provider user interface!
+     *
+     * @return Zendesk
+     */
+    public function setDefaultScopes(Array $scopes)
+    {
+        if (!empty($scopes)) {
+            $this->scopes = $scopes;
+        }
+
+        return $this;
     }
 
     /**
